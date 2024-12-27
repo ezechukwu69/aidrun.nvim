@@ -34,7 +34,13 @@ M.create_command = function()
 	cmd = append_option(config.options.architect, cmd, "--architect", "")
 	cmd = append_option(config.options.weak_model, cmd, "--weak-model", config.options.weak_model, true)
 	cmd = append_option(config.options.editor_model, cmd, "--editor-model", config.options.weak_model, true)
-	cmd = append_option(config.options.editor_edit_format, cmd, "--editor-edit-format", config.options.weak_model, true)
+	cmd = append_option(
+		config.options.editor_edit_format,
+		cmd,
+		"--editor-edit-format",
+		config.options.editor_edit_format,
+		true
+	)
 	cmd = append_option(config.options.edit_format, cmd, "--edit-format", config.options.edit_format, true)
 	cmd =
 		append_option(config.options.show_model_warnings, cmd, "--show-model-warnings", config.options.weak_model, true)
