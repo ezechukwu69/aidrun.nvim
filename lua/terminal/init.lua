@@ -46,7 +46,7 @@ M.create_terminal = function()
 	-- Map <esc><esc> to stop insert mode
 	vim.keymap.set({ "x", "t" }, "<esc><esc>", function()
 		vim.cmd("stopinsert")
-	end, { buffer = state.terminal_bufnr, nowait = true })
+	end, { buffer = buf, nowait = true })
 
 	state.terminal_bufnr = buf
 	state.terminal_winid = win
