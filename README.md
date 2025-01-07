@@ -39,6 +39,9 @@ The following subcommands are available:
 -   `:Aidrun workspace_diagnostics`: Run workspace diagnostics.
 -   `:Aidrun file_diagnostics`: Run file diagnostics.
 -   `:Aidrun add_file`: Add a file to the aider session.
+-   `:Aidrun commit`: Commit changes.
+-   `:Aidrun web`: Open the aider web UI.
+-   `:Aidrun paste`: Paste from the clipboard.
 
 ## ⚙️ Configuration
 
@@ -53,6 +56,8 @@ The plugin is configured via the `lua/config.lua` file.
     -   `architect`: Whether to use the architect mode (default: true).
     -   `weak_model`: The weak model to use (default: "").
     -   `model`: The model to use (default: "").
+    -   `vim`: Whether to use vim mode (default: false).
+    -   `browser`: Whether to use browser mode (default: false).
     -   `editor_model`: The editor model to use (default: "").
     -   `editor_edit_format`: The editor edit format to use (default: "").
     -   `show_model_warnings`: Whether to show model warnings (default: true).

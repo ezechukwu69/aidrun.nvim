@@ -13,6 +13,8 @@
 ---@field show_model_warnings boolean
 ---@field dark_mode boolean
 ---@field show_diffs boolean
+---@field vim? boolean
+---@field browser? boolean
 ---@field edit_format? "whole" | "diff" | "diff-fenced" | "udiff"
 ---@field auto_commits_disabled boolean
 ---@field attribute_author_disabled boolean
@@ -36,6 +38,8 @@ M.config = {
 		editor_model = "",
 		edit_format = nil,
 		model = "",
+		vim = false,
+		browser = false,
 		editor_edit_format = "",
 		show_model_warnings = true,
 		dark_mode = true,

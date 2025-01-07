@@ -42,6 +42,8 @@ function M.setup(opts)
 			require("commands.commit")
 		elseif args.args == "web" then
 			require("commands.web")
+		elseif args.args == "paste" then
+			require("commands.paste")
 		end
 	end, {
 		nargs = 1,
@@ -53,6 +55,7 @@ function M.setup(opts)
 				"toggle",
 				"rewrite",
 				"ask",
+				"paste",
 				"send_selection",
 				"file_picker",
 				"workspace_diagnostics",
