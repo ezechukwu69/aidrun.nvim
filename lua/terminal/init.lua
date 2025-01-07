@@ -44,6 +44,7 @@ M.create_terminal = function()
 		col = vim.o.columns - width,
 		border = "rounded",
 	})
+	vim.api.nvim_set_current_win(win)
 
 	state.terminal_bufnr = buf
 	state.terminal_winid = win
