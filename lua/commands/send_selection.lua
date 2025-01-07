@@ -5,7 +5,7 @@ if selection == nil then
 	return
 end
 
-vim.ui.input({ prompt = "Enter command to send to terminal", expand = true }, function(cmd)
+vim.ui.input({ prompt = "Enter command to send to model", expand = true }, function(cmd)
 	if cmd == "" or cmd == nil then
 		return
 	end
