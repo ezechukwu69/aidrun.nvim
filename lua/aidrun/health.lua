@@ -16,9 +16,11 @@ M.check = function()
 
 	if not telescope_ok and not fzf_ok then
 		health.error("Telescope or Fzf-lua not found")
-	elseif telescope_ok then
+	end
+	if telescope_ok then
 		health.ok("Telescope installed")
-	elseif fzf_ok then
+	end
+	if fzf_ok then
 		health.ok("Fzf-lua installed")
 	end
 end
