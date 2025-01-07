@@ -60,11 +60,14 @@ M.create_terminal = function()
 	vim.bo[buf].buflisted = false
 
 	-- Open the terminal and start the command
-	vim.api.nvim_open_term(buf, {
+	vim.fn.termopen(state.command, {
 		on_exit = function()
+			-- Close the floating window when the command exits
 			M.close_terminal()
 		end,
 	})
+
+	vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf }) -- Auto-remove buffer when closed
 
 	state.terminal_id = vim.bo.channel
 	-- vim.cmd.startinsert()
@@ -74,15 +77,15 @@ M.create_terminal = function()
 			if not vim.api.nvim_win_is_valid(state.terminal_winid) then
 				return
 			end
-			local width = math.floor(vim.o.columns * (state.config.width or 0.35))
-			local height = vim.o.lines
+			local inner_width = math.floor(vim.o.columns * (state.config.width or 0.35))
+			local inner_height = vim.o.lines
 			vim.api.nvim_win_set_config(state.terminal_winid, {
-				width = width,
-				height = height,
+				width = inner_width,
+				height = inner_height,
 				row = 0,
-				col = vim.o.columns - width,
+				col = vim.o.columns - inner_width,
 			})
-			state.terminal_width = width
+			state.terminal_width = inner_width
 		end,
 	})
 end
