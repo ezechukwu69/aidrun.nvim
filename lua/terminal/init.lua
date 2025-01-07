@@ -62,11 +62,11 @@ M.create_terminal = function()
 
 	vim.wo[state.terminal_winid].number = false
 	vim.wo[state.terminal_winid].relativenumber = false
-	-- vim.bo[buf].buflisted = false
+	vim.bo[buf].buflisted = false
 
 	-- Open the terminal and start the command
 
-	-- vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf }) -- Auto-remove buffer when closed
+	vim.api.nvim_set_option_value("bufhidden", "hide", { buf = buf }) -- Auto-remove buffer when closed
 
 	state.terminal_id = vim.bo.channel
 	vim.cmd.startinsert()
