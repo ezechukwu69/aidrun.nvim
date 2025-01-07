@@ -44,22 +44,21 @@ M.create_terminal = function()
 		col = vim.o.columns - width,
 		border = "rounded",
 	})
-	vim.fn.termopen(state.command, {
-		on_exit = function()
-			-- Close the floating window when the command exits
-			M.close_terminal()
-		end,
-	})
+
+	state.terminal_bufnr = buf
+	state.terminal_winid = win
+	state.terminal_width = width
+
+	if vim.bo[state.terminal_bufnr].buftype ~= "terminal" then
+		vim.cmd.terminal(state.command)
+	end
+
 	state.terminal_width = width
 
 	-- Map <esc><esc> to stop insert mode
 	vim.keymap.set({ "x", "t" }, "<esc><esc>", function()
 		vim.cmd("stopinsert")
 	end, { buffer = buf, nowait = true })
-
-	state.terminal_bufnr = buf
-	state.terminal_winid = win
-	state.terminal_width = width
 
 	vim.wo[state.terminal_winid].number = false
 	vim.wo[state.terminal_winid].relativenumber = false
