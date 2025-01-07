@@ -50,6 +50,7 @@ M.create_terminal = function()
 
 	state.terminal_bufnr = buf
 	state.terminal_winid = win
+    state.terminal_width = width
 
 	vim.wo[state.terminal_winid].number = false
 	vim.wo[state.terminal_winid].relativenumber = false
@@ -72,6 +73,14 @@ M.create_terminal = function()
 
 	state.terminal_id = vim.bo.channel
 	vim.cmd.startinsert()
+
+    vim.api.nvim_create_autocmd("WinResized", {
+        callback = function()
+            if state.terminal_winid ~= -1 and vim.api.nvim_win_is_valid(state.terminal_winid) then
+                vim.api.nvim_win_set_width(state.terminal_winid, state.terminal_width)
+            end
+        end
+    })
 end
 
 --- call create terminal if the terminal_id is nil or window is not valid or buffer is not valid
