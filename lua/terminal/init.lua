@@ -71,6 +71,15 @@ M.create_terminal = function()
 	state.terminal_id = vim.bo.channel
 	vim.cmd.startinsert()
 
+	vim.api.nvim_create_autocmd("TermClose", {
+		buffer = buf,
+		callback = function()
+			if vim.api.nvim_win_is_valid(state.terminal_winid) then
+				M.close_terminal()
+			end
+		end,
+	})
+
 	-- vim.api.nvim_create_autocmd("WinResized", {
 	-- 	callback = function()
 	-- 		if not vim.api.nvim_win_is_valid(state.terminal_winid) then
