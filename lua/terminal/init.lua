@@ -28,7 +28,7 @@ M.create_terminal = function()
 	state.command = M.create_command(state.config)
 	---@type number
 	local buf
-	if state.terminal_bufnr ~= -1 and vim.api.nvim_buf_is_valid(state.terminal_bufnr) then
+	if vim.api.nvim_buf_is_valid(state.terminal_bufnr) then
 		buf = state.terminal_bufnr
 	else
 		buf = vim.api.nvim_create_buf(false, true)
@@ -36,7 +36,7 @@ M.create_terminal = function()
 
 	local width = math.floor(vim.o.columns * (state.config.width or 0.35))
 	local height = vim.o.lines
-	local win = vim.api.nvim_open_win(buf, false, {
+	local win = vim.api.nvim_open_win(buf, true, {
 		relative = "editor",
 		width = width,
 		height = height,
@@ -44,7 +44,6 @@ M.create_terminal = function()
 		col = vim.o.columns - width,
 		border = "rounded",
 	})
-	vim.api.nvim_set_current_win(win)
 
 	state.terminal_bufnr = buf
 	state.terminal_winid = win
@@ -63,33 +62,33 @@ M.create_terminal = function()
 
 	vim.wo[state.terminal_winid].number = false
 	vim.wo[state.terminal_winid].relativenumber = false
-	vim.bo[buf].buflisted = false
+	-- vim.bo[buf].buflisted = false
 
 	-- Open the terminal and start the command
 
 	-- vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf }) -- Auto-remove buffer when closed
 
 	state.terminal_id = vim.bo.channel
-	-- vim.cmd.startinsert()
+	vim.cmd.startinsert()
 
-	vim.api.nvim_create_autocmd("WinResized", {
-		callback = function()
-			if not vim.api.nvim_win_is_valid(state.terminal_winid) then
-				return
-			end
-			local inner_width = math.floor(vim.o.columns * (state.config.width or 0.35))
-			local inner_height = vim.o.lines
-			vim.api.nvim_win_set_config(state.terminal_winid, {
-				relative = "editor",
-				width = inner_width,
-				height = inner_height,
-				row = 0,
-				col = vim.o.columns - inner_width,
-				border = "rounded",
-			})
-			state.terminal_width = inner_width
-		end,
-	})
+	-- vim.api.nvim_create_autocmd("WinResized", {
+	-- 	callback = function()
+	-- 		if not vim.api.nvim_win_is_valid(state.terminal_winid) then
+	-- 			return
+	-- 		end
+	-- 		local inner_width = math.floor(vim.o.columns * (state.config.width or 0.35))
+	-- 		local inner_height = vim.o.lines
+	-- 		vim.api.nvim_win_set_config(state.terminal_winid, {
+	-- 			relative = "editor",
+	-- 			width = inner_width,
+	-- 			height = inner_height,
+	-- 			row = 0,
+	-- 			col = vim.o.columns - inner_width,
+	-- 			border = "rounded",
+	-- 		})
+	-- 		state.terminal_width = inner_width
+	-- 	end,
+	-- })
 end
 
 --- call create terminal if the terminal_id is nil or window is not valid or buffer is not valid
