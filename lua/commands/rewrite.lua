@@ -1,22 +1,28 @@
-local selection = require("terminal.utils.selection").get_visual_selection()
+local M = {}
 
-if selection == nil then
-	vim.notify("No selection found", vim.log.levels.ERROR)
-	return
-end
+M.invoke = function()
+	local selection = require("terminal.utils.selection").get_visual_selection()
 
-vim.ui.input({ prompt = "Enter command to send to model", expand = true }, function(cmd)
-	if cmd == "" or cmd == nil then
+	if selection == nil then
+		vim.notify("No selection found", vim.log.levels.ERROR)
 		return
 	end
 
-	local commentstring = require("terminal.utils.comment").commentstring
+	vim.ui.input({ prompt = "Enter command to send to model", expand = true }, function(cmd)
+		if cmd == "" or cmd == nil then
+			return
+		end
 
-	cmd = commentstring() .. " AI!: " .. cmd .. "\n" .. selection .. "\n" .. commentstring() .. "AI!"
+		local commentstring = require("terminal.utils.comment").commentstring
 
-	local start_line, start_col, end_line, end_col = require("terminal.utils.selection").get_visual_position()
-	require("terminal.utils.selection").replace_selection(start_line, end_line, cmd)
+		cmd = commentstring() .. " AI!: " .. cmd .. "\n" .. selection .. "\n" .. commentstring() .. "AI!"
 
-	-- local terminal = require("terminal")
-	-- terminal.send_cmd(cmd)
-end)
+		local start_line, start_col, end_line, end_col = require("terminal.utils.selection").get_visual_position()
+		require("terminal.utils.selection").replace_selection(start_line, end_line, cmd)
+
+		-- local terminal = require("terminal")
+		-- terminal.send_cmd(cmd)
+	end)
+end
+
+return M

@@ -1,7 +1,7 @@
 local M = {}
 
 --@param opts Config
-M.setup = function()
+M.invoke = function()
 	---@diagnostic disable-next-line: missing-fields
 	local project_root = vim.fn.getcwd()
 	local file_path = vim.fn.expand("%:p")

@@ -1,7 +1,7 @@
 local M = {}
 
 --@param opts Config
-M.setup = function()
+M.invoke = function()
 	local cmd = "Fix diagnostics "
 	local fzf_ok, fzf = pcall(require, "fzf-lua")
 	local telescope_ok, telescope = pcall(require, "telescope.builtin")

@@ -1,11 +1,17 @@
-vim.ui.input({ prompt = "Enter command to send to model", expand = true }, function(cmd)
-	if cmd == "" or cmd == nil then
-		return
-	end
+local M = {}
 
-	local commentstring = require("terminal.utils.comment").commentstring
+M.invoke = function()
+	vim.ui.input({ prompt = "Enter command to send to model", expand = true }, function(cmd)
+		if cmd == "" or cmd == nil then
+			return
+		end
 
-	cmd = commentstring() .. " AI!: " .. cmd
+		local commentstring = require("terminal.utils.comment").commentstring
 
-	require("terminal.utils.selection").insert_text(cmd)
-end)
+		cmd = commentstring() .. " AI!: " .. cmd
+
+		require("terminal.utils.selection").insert_text(cmd)
+	end)
+end
+
+return M

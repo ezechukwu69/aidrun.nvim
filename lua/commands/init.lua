@@ -19,33 +19,33 @@ function M.setup(opts)
 	cmd("Aidrun", function(args)
 		require("terminal").setConfig(opts)
 		if args.args == "send" then
-			require("commands.send")
+			require("commands.send").invoke()
 		elseif args.args == "toggle" then
-			require("commands.toggle")
+			require("commands.toggle").invoke()
 		elseif args.args == "rewrite" then
-			require("commands.rewrite")
+			require("commands.rewrite").invoke()
 		elseif args.args == "ask" then
-			require("commands.ask")
+			require("commands.ask").invoke()
 		elseif args.args == "send_selection" then
-			require("commands.send_selection")
+			require("commands.send_selection").invoke()
 		elseif args.args == "file_picker" then
-			require("commands.file_picker")
+			require("commands.file_picker").invoke()
 		elseif args.args == "inline" then
-			require("commands.inline")
+			require("commands.inline").invoke()
 		elseif args.args == "workspace_diagnostics" then
-			require("commands.workspace_diagnostics")
+			require("commands.workspace_diagnostics").invoke()
 		elseif args.args == "file_diagnostics" then
-			require("commands.file_diagnostics").setup()
+			require("commands.file_diagnostics").invoke()
 		elseif args.args == "add_file" then
-			require("commands.add_file")
+			require("commands.add_file").invoke()
 		elseif args.args == "commit" then
-			require("commands.commit")
+			require("commands.commit").invoke()
 		elseif args.args == "web" then
-			require("commands.web")
+			require("commands.web").invoke()
 		elseif args.args == "paste" then
-			require("commands.paste")
+			require("commands.paste").invoke()
 		elseif args.args == "clear" then
-			require("commands.clear")
+			require("commands.clear").invoke()
 		end
 	end, {
 		nargs = 1,
