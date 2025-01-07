@@ -1,6 +1,5 @@
 ---@class Config
 ---@field width? number
----@field height? number
 ---@field options ConfigOps
 
 ---@class ConfigOps
@@ -29,8 +28,7 @@ M.config = {
 	-- Your configuration comes here
 	-- or leave it empty to use the default settings
 	-- refer to the configuration section below
-	width = 0.35,
-	height = 0.35,
+	width = 0.3,
 	options = {
 		watch = true,
 		architect = true,

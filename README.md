@@ -49,8 +49,7 @@ The plugin is configured via the `lua/config.lua` file.
 
 ### Options
 
--   `width`: The width of the aider window as a fraction of the screen width (default: 0.35).
--   `height`: The height of the aider window as a fraction of the screen height (default: 0.35).
+-   `width`: The width of the aider window as a fraction of the screen width (default: 0.3).
 -   `options`: A table containing the following options:
     -   `watch`: Whether to watch for file changes (default: true).
     -   `architect`: Whether to use the architect mode (default: true).
