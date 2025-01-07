@@ -67,7 +67,7 @@ M.create_terminal = function()
 
 	-- Open the terminal and start the command
 
-	vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf }) -- Auto-remove buffer when closed
+	-- vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf }) -- Auto-remove buffer when closed
 
 	state.terminal_id = vim.bo.channel
 	-- vim.cmd.startinsert()
@@ -114,7 +114,7 @@ M.close_terminal = function()
 end
 
 M.toggle_terminal = function()
-	if state.terminal_winid ~= -1 and vim.api.nvim_win_is_valid(state.terminal_winid) then
+	if vim.api.nvim_win_is_valid(state.terminal_winid) then
 		print("hiding terminal")
 		vim.api.nvim_win_hide(state.terminal_winid)
 	else
