@@ -60,19 +60,14 @@ M.create_terminal = function()
 	vim.bo[buf].buflisted = false
 
 	-- Open the terminal and start the command
-	vim.cmd.terminal(state.command)
-
-	-- detect when program running in terminal ends so we can close the terminal
-	vim.api.nvim_create_autocmd("TermClose", {
-		once = true,
-		buffer = buf,
-		callback = function()
+	vim.api.nvim_open_term(buf, {
+		on_exit = function()
 			M.close_terminal()
 		end,
 	})
 
 	state.terminal_id = vim.bo.channel
-	vim.cmd.startinsert()
+	-- vim.cmd.startinsert()
 
 	vim.api.nvim_create_autocmd("WinResized", {
 		callback = function()
