@@ -29,10 +29,17 @@ M.create_command = function()
 	local cmd = "aider"
 	---@type Config
 	local config = require("terminal").state.config
+	local auto_lint = ""
+	if config.options.auto_lint then
+		auto_lint = "--auto-lint"
+	else
+		auto_lint = "--no-auto-lint"
+	end
 	cmd = append_option(config.options.model, cmd, "--model", config.options.model, true)
 	cmd = append_option(config.options.watch, cmd, "--watch-files", "")
 	cmd = append_option(config.options.architect, cmd, "--architect", "")
 	cmd = append_option(config.options.vim, cmd, "--vim", "")
+	cmd = append_option(config.options.auto_lint, cmd, auto_lint, "")
 	cmd = append_option(config.options.browser, cmd, "--browser", "")
 	cmd = append_option(config.options.weak_model, cmd, "--weak-model", config.options.weak_model, true)
 	cmd = append_option(config.options.editor_model, cmd, "--editor-model", config.options.weak_model, true)

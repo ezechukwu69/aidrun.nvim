@@ -7,6 +7,7 @@
 ---@field architect boolean
 ---@field weak_model string
 ---@field model string
+---@field auto_lint? boolean
 ---@field editor_model string
 ---@field editor_edit_format string
 ---@field show_model_warnings boolean
@@ -36,6 +37,7 @@ M.config = {
 		editor_model = "",
 		edit_format = nil,
 		model = "",
+		auto_lint = false,
 		vim = false,
 		browser = false,
 		editor_edit_format = "",
