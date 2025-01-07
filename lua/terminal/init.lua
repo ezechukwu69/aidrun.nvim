@@ -80,10 +80,12 @@ M.create_terminal = function()
 			local inner_width = math.floor(vim.o.columns * (state.config.width or 0.35))
 			local inner_height = vim.o.lines
 			vim.api.nvim_win_set_config(state.terminal_winid, {
+				relative = "editor",
 				width = inner_width,
 				height = inner_height,
 				row = 0,
 				col = vim.o.columns - inner_width,
+				border = "rounded",
 			})
 			state.terminal_width = inner_width
 		end,
