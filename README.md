@@ -25,7 +25,9 @@ Install the plugin using lazy.nvim:
 
 ## 🚀 Usage
 
-Use the `:Aidrun` command followed by a subcommand:
+The plugin provides a main user command `:Aidrun` which takes a subcommand as an argument.
+
+The following subcommands are available:
 
 -   `:Aidrun send`: Send the current buffer to aider.
 -   `:Aidrun toggle`: Toggle the aider window.
@@ -34,6 +36,9 @@ Use the `:Aidrun` command followed by a subcommand:
 -   `:Aidrun send_selection`: Send the current selection to aider.
 -   `:Aidrun file_picker`: Open the aider file picker.
 -   `:Aidrun inline`: Use aider inline.
+-   `:Aidrun workspace_diagnostics`: Run workspace diagnostics.
+-   `:Aidrun file_diagnostics`: Run file diagnostics.
+-   `:Aidrun add_file`: Add a file to the aider session.
 
 ## ⚙️ Configuration
 
