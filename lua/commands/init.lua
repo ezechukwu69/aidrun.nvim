@@ -38,6 +38,10 @@ function M.setup(opts)
 			require("commands.file_diagnostics")
 		elseif args.args == "add_file" then
 			require("commands.add_file")
+		elseif args.args == "commit" then
+			require("commands.commit")
+		elseif args.args == "web" then
+			require("commands.web")
 		end
 	end, {
 		nargs = 1,
@@ -55,6 +59,8 @@ function M.setup(opts)
 				"file_diagnostics",
 				"add_file",
 				"inline",
+				"commit",
+				"web",
 			}
 		end,
 	})
