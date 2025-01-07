@@ -34,14 +34,17 @@ M.create_terminal = function()
 		buf = vim.api.nvim_create_buf(false, true)
 	end
 
-	-- Open a right vertical split
-	vim.cmd("rightbelow vsplit")
-	local win = vim.api.nvim_get_current_win()
-	vim.api.nvim_win_set_buf(win, buf)
-
-	-- Optionally set window size
 	local width = math.floor(vim.o.columns * (state.config.width or 0.35))
-	vim.api.nvim_win_set_width(win, width)
+	local height = vim.o.lines
+	local win = vim.api.nvim_open_win(buf, false, {
+		relative = "editor",
+		width = width,
+		height = height,
+		row = 0,
+		col = vim.o.columns - width,
+		border = "rounded",
+	})
+	state.terminal_width = width
 
 	-- Map <esc><esc> to stop insert mode
 	vim.keymap.set({ "x", "t" }, "<esc><esc>", function()
@@ -50,7 +53,7 @@ M.create_terminal = function()
 
 	state.terminal_bufnr = buf
 	state.terminal_winid = win
-    state.terminal_width = width
+	state.terminal_width = width
 
 	vim.wo[state.terminal_winid].number = false
 	vim.wo[state.terminal_winid].relativenumber = false
@@ -73,14 +76,6 @@ M.create_terminal = function()
 
 	state.terminal_id = vim.bo.channel
 	vim.cmd.startinsert()
-
-    vim.api.nvim_create_autocmd("WinResized", {
-        callback = function()
-            if state.terminal_winid ~= -1 and vim.api.nvim_win_is_valid(state.terminal_winid) then
-                vim.api.nvim_win_set_width(state.terminal_winid, state.terminal_width)
-            end
-        end
-    })
 end
 
 --- call create terminal if the terminal_id is nil or window is not valid or buffer is not valid
