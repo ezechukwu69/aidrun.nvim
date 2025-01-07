@@ -33,6 +33,7 @@ M.create_command = function()
 	cmd = append_option(config.options.watch, cmd, "--watch-files", "")
 	cmd = append_option(config.options.architect, cmd, "--architect", "")
 	cmd = append_option(config.options.vim, cmd, "--vim", "")
+	cmd = append_option(config.options.browser, cmd, "--browser", "")
 	cmd = append_option(config.options.weak_model, cmd, "--weak-model", config.options.weak_model, true)
 	cmd = append_option(config.options.editor_model, cmd, "--editor-model", config.options.weak_model, true)
 	cmd = append_option(
