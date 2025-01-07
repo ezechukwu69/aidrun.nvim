@@ -35,7 +35,7 @@ function M.setup(opts)
 		elseif args.args == "workspace_diagnostics" then
 			require("commands.workspace_diagnostics")
 		elseif args.args == "file_diagnostics" then
-			require("commands.file_diagnostics")
+			require("commands.file_diagnostics").setup()
 		elseif args.args == "add_file" then
 			require("commands.add_file")
 		elseif args.args == "commit" then
