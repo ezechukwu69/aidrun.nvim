@@ -16,33 +16,48 @@ local cmd = vim.api.nvim_create_user_command
 
 ---@param opts Config
 function M.setup(opts)
-  cmd("Aidrun", function(args)
-    require("terminal").setConfig(opts)
-    if args.args == "send" then
-      require("commands.send").setup()
-    elseif args.args == "toggle" then
-      require("commands.toggle").setup()
-    elseif args.args == "rewrite" then
-      require("commands.rewrite").setup()
-    elseif args.args == "ask" then
-      require("commands.ask").setup()
-    elseif args.args == "send_selection" then
-      require("commands.send_selection").setup()
-    elseif args.args == "file_picker" then
-      require("commands.file_picker").setup()
-    elseif args.args == "inline" then
-      require("commands.inline").setup()
-    elseif args.args == "fix_diagnostics" then
-      require("commands.fix_diagnostics").setup()
-    end
-  end, {
-    nargs = 1,
-    range = true,
-    desc = "Aidrun main entry point",
-    complete = function(ArgLead, CmdLine, CursorPos)
-      return { "send", "toggle", "rewrite", "ask", "send_selection", "file_picker", "fix_diagnostics", "inline" }
-    end,
-  })
+	cmd("Aidrun", function(args)
+		require("terminal").setConfig(opts)
+		if args.args == "send" then
+			require("commands.send")
+		elseif args.args == "toggle" then
+			require("commands.toggle")
+		elseif args.args == "rewrite" then
+			require("commands.rewrite")
+		elseif args.args == "ask" then
+			require("commands.ask")
+		elseif args.args == "send_selection" then
+			require("commands.send_selection")
+		elseif args.args == "file_picker" then
+			require("commands.file_picker")
+		elseif args.args == "inline" then
+			require("commands.inline")
+		elseif args.args == "workspace_diagnostics" then
+			require("commands.workspace_diagnostics")
+		elseif args.args == "file_diagnostics" then
+			require("commands.file_diagnostics")
+		elseif args.args == "add_file" then
+			require("commands.add_file")
+		end
+	end, {
+		nargs = 1,
+		range = true,
+		desc = "Aidrun main entry point",
+		complete = function(ArgLead, CmdLine, CursorPos)
+			return {
+				"send",
+				"toggle",
+				"rewrite",
+				"ask",
+				"send_selection",
+				"file_picker",
+				"workspace_diagnostics",
+				"file_diagnostics",
+				"add_file",
+				"inline",
+			}
+		end,
+	})
 end
 
 return M
