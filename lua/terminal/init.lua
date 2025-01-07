@@ -57,13 +57,10 @@ M.create_terminal = function()
 
 	vim.wo[state.terminal_winid].number = false
 	vim.wo[state.terminal_winid].relativenumber = false
+	vim.bo[buf].buflisted = false
 
-	---@type number
-	if vim.bo[state.terminal_bufnr].buftype ~= "terminal" then
-		-- Open the terminal and start the command
-		vim.cmd.terminal(state.command)
-		vim.bo[buf].buflisted = false
-	end
+	-- Open the terminal and start the command
+	vim.cmd.terminal(state.command)
 
 	-- detect when program running in terminal ends so we can close the terminal
 	vim.api.nvim_create_autocmd("TermClose", {
@@ -76,6 +73,23 @@ M.create_terminal = function()
 
 	state.terminal_id = vim.bo.channel
 	vim.cmd.startinsert()
+
+	vim.api.nvim_create_autocmd("WinResized", {
+		callback = function()
+			if not vim.api.nvim_win_is_valid(state.terminal_winid) then
+				return
+			end
+			local width = math.floor(vim.o.columns * (state.config.width or 0.35))
+			local height = vim.o.lines
+			vim.api.nvim_win_set_config(state.terminal_winid, {
+				width = width,
+				height = height,
+				row = 0,
+				col = vim.o.columns - width,
+			})
+			state.terminal_width = width
+		end,
+	})
 end
 
 --- call create terminal if the terminal_id is nil or window is not valid or buffer is not valid
