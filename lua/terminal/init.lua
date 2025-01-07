@@ -44,6 +44,12 @@ M.create_terminal = function()
 		col = vim.o.columns - width,
 		border = "rounded",
 	})
+	vim.fn.termopen(state.command, {
+		on_exit = function()
+			-- Close the floating window when the command exits
+			M.close_terminal()
+		end,
+	})
 	state.terminal_width = width
 
 	-- Map <esc><esc> to stop insert mode
@@ -60,12 +66,6 @@ M.create_terminal = function()
 	vim.bo[buf].buflisted = false
 
 	-- Open the terminal and start the command
-	vim.fn.termopen(state.command, {
-		on_exit = function()
-			-- Close the floating window when the command exits
-			M.close_terminal()
-		end,
-	})
 
 	vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf }) -- Auto-remove buffer when closed
 
