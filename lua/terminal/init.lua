@@ -49,6 +49,7 @@ M.create_terminal = function()
 	state.terminal_winid = win
 	state.terminal_width = width
 
+	vim.bo[state.terminal_bufnr].modifiable = true
 	if vim.bo[state.terminal_bufnr].buftype ~= "terminal" then
 		vim.cmd.terminal(state.command)
 	end
