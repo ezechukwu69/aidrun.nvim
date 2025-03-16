@@ -70,6 +70,7 @@ M.create_command = function()
 		"--no-attribute-commit-message-committer",
 		""
 	)
+	cmd = cmd .. " " .. config.options.additional_args
 	return cmd
 end
 

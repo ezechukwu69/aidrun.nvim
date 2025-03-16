@@ -21,6 +21,7 @@
 ---@field attribute_committer_disabled boolean
 ---@field attribute_commit_message_author_disabled boolean
 ---@field attribute_commit_message_committer_disabled boolean
+---@field additional_args string
 
 local M = {}
 
@@ -49,6 +50,7 @@ M.config = {
 		attribute_committer_disabled = true,
 		attribute_commit_message_author_disabled = true,
 		attribute_commit_message_committer_disabled = true,
+		additional_args = "",
 	},
 }
 

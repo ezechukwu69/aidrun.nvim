@@ -1,5 +1,4 @@
 # Aidrun
-
 A Neovim plugin that integrates with the aider chat tool.
 
 ## ✨ Features
