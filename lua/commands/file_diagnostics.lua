@@ -3,6 +3,7 @@ local M = {}
 --@param opts Config
 M.invoke = function()
 	local cmd = "Fix diagnostics "
+	local snacks_ok, snacks = pcall(require, "snacks")
 	local fzf_ok, fzf = pcall(require, "fzf-lua")
 	local telescope_ok, telescope = pcall(require, "telescope.builtin")
 
@@ -11,6 +12,20 @@ M.invoke = function()
 	end
 
 	local terminal = require("terminal")
+
+	if snacks_ok then
+		Snacks.picker.diagnostics_buffer({
+			confirm = function(picker, item, action)
+				picker:close()
+				if item then
+					cmd = cmd .. item.file .. ":" .. item.text
+					terminal.send_cmd(cmd .. "\r\n")
+				else
+					print("No file selected")
+				end
+			end,
+		})
+	end
 
 	if fzf_ok then
 		fzf.diagnostics_document({

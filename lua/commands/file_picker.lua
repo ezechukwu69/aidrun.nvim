@@ -2,6 +2,7 @@ local M = {}
 
 M.invoke = function()
 	local fzf_ok, fzf = pcall(require, "fzf-lua")
+	local snacks_ok, snacks = pcall(require, "snacks")
 	local telescope_ok, telescope = pcall(require, "telescope.builtin")
 
 	if not fzf_ok and not telescope_ok then
@@ -9,6 +10,20 @@ M.invoke = function()
 	end
 
 	local terminal = require("terminal")
+
+	if snacks_ok then
+		Snacks.picker.files({
+			confirm = function(picker, item, action)
+				picker:close()
+				if item then
+					local cmd = "/add " .. item.file
+					terminal.send_cmd(cmd .. "\r\n")
+				else
+					print("No file selected")
+				end
+			end,
+		})
+	end
 
 	if fzf_ok then
 		fzf.files({
