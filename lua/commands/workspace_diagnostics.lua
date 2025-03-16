@@ -17,7 +17,7 @@ M.invoke = function()
 			confirm = function(picker, item, action)
 				picker:close()
 				if item then
-					cmd = cmd .. item.file .. ":" .. item.text
+					cmd = cmd .. item.text
 					terminal.send_cmd(cmd .. "\r\n")
 				else
 					print("No file selected")
