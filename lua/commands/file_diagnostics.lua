@@ -25,6 +25,7 @@ M.invoke = function()
 				end
 			end,
 		})
+		return
 	end
 
 	if fzf_ok then

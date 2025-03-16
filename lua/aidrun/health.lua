@@ -12,10 +12,17 @@ M.check = function()
 	end
 
 	local fzf_ok, fzf = pcall(require, "fzf-lua")
+	local snacks_ok, snacks = pcall(require, "snacks")
 	local telescope_ok, telescope = pcall(require, "telescope")
 
 	if not telescope_ok and not fzf_ok then
 		health.error("Telescope or Fzf-lua not found")
+	end
+	if not snacks_ok then
+		health.error("Snacks not found")
+	end
+	if snacks_ok then
+		health.ok("Snacks installed")
 	end
 	if telescope_ok then
 		health.ok("Telescope installed")
